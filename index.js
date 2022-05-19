@@ -3,6 +3,17 @@ const mysql = require("mysql2");
 const inquirer = require("inquirer");
 const consoleTable = require("console.table");
 
+// Connect to database and provide username and password.
+const dbConnection = mysql.createConnection(
+    {
+      host: 'localhost',
+      user: 'root',
+      password: 'rootroot',
+      database: 'employee_db'
+    },
+    console.log(`Connected to the employee_db database.`)
+  );
+
 // Prompts to be used when starting the app and choosing to perform additional actions.
 const menuOptions = () => {
   inquirer.prompt({
