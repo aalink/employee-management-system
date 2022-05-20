@@ -17,8 +17,8 @@ const dbConnection = mysql.createConnection(
 // Prompts to be used when starting the app and choosing to perform additional actions.
 const menuOptions = () => {
   inquirer.prompt({
-    name: "menu",
     type: "list",
+    name: "menu",
     message:
       "Welcome to the Employee Management Application. Select from the following options:",
     choices: [
@@ -33,5 +33,29 @@ const menuOptions = () => {
     ],
   });
 };
+
+const addDepartment = () => {
+  inquirer.prompt({
+    type: "input",
+    name: "addDepartment",
+    message: "What is the name of the new department?"
+  })
+}
+
+const addRole = () => {
+  inquirer.prompt({
+    type: "input",
+    name: "addRole",
+    message: "What is the name of the new role?"
+  })
+}
+
+const addEmployee = () => {
+  inquirer.prompt({
+    type: "input",
+    name: "addEmployee",
+    message: "What is the name of the new employee?"
+  })
+}
 
 menuOptions();
