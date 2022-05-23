@@ -113,13 +113,34 @@ const addRole = () => {
 
 const addEmployee = () => {
   inquirer
-    .prompt({
-      type: "input",
-      name: "addEmployee",
-      message: "What is the name of the new employee?",
-    })
+    .prompt([
+      {
+        type: "input",
+        name: "employeeFirstName",
+        message: "What is the first name of the new employee?",
+      },
+      {
+        type: "input",
+        name: "employeeLastName",
+        message: "What is the last name of the new employee?",
+      },
+      {
+        type: "input",
+        name: "employeeRole",
+        message: "What is the role of this employee?",
+      },
+      {
+        type: "input",
+        name: "employeeManager",
+        message: "Who is the manager of this employee?",
+      },
+    ])
     .then((answer) => {
-      console.log(answer.addEmployee);
+      console.log(answer.employeeFirstName);
+      console.log(answer.employeeLastName);
+      console.log(answer.employeeRole);
+      console.log(answer.employeeManager);
+      menuOptions()
     });
 };
 ///////////////////////////////////////
@@ -140,7 +161,8 @@ const viewEmployees = () => {
   menuOptions();
 };
 const quitApp = () => {
-  console.log("Returning to menu options.");
+  console.log("Quitting Application.");
+  dbConnection.end();
 };
 
 menuOptions();
