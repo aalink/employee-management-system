@@ -5,14 +5,14 @@ const consoleTable = require("console.table");
 
 // Connect to database and provide username and password.
 const dbConnection = mysql.createConnection(
-    {
-      host: 'localhost',
-      user: 'root',
-      password: 'rootroot',
-      database: 'employee_db'
-    },
-    console.log(`Connected to the employee_db database.`)
-  );
+  {
+    host: "localhost",
+    user: "root",
+    password: "rootroot",
+    database: "employee_db",
+  },
+  console.log(`Connected to the employee_db database.`)
+);
 
 // Prompts to be used when starting the app and choosing to perform additional actions.
 const menuOptions = () => {
@@ -36,81 +36,111 @@ const menuOptions = () => {
     .then((answer) => {
       console.log(answer.menu);
       if (answer.menu === "Add department") {
-        console.log("Adding department");
+        // console.log("Adding department");
         addDepartment();
       }
       if (answer.menu === "Add role") {
-        console.log("Adding role");
+        // console.log("Adding role");
         addRole();
       }
       if (answer.menu === "Add employee") {
-        console.log("Adding Employee");
+        // console.log("Adding Employee");
         addEmployee();
       }
       if (answer.menu === "Update employee role") {
-        console.log("Adding Employee");
+        // console.log("Adding Employee");
         updateEmployeeRole();
       }
       if (answer.menu === "View all departments") {
-        console.log("View Departments");
+        // console.log("View Departments");
         viewDepartments();
       }
       if (answer.menu === "View all roles") {
-        console.log("Viewing Roles");
+        // console.log("Viewing Roles");
         viewRoles();
       }
       if (answer.menu === "View all employees") {
-        console.log("Viewing Employees");
+        // console.log("Viewing Employees");
         viewEmployees();
       }
       if (answer.menu === "Quit Employee Management Application") {
-        console.log("Quitting Application");
+        // console.log("Quitting Application");
         quitApp();
       }
     });
 };
 
+// Add Functions //////////////////////
 const addDepartment = () => {
-  inquirer.prompt({
-    type: "input",
-    name: "addDepartment",
-    message: "What is the name of the new department?",
-  });
+  inquirer
+    .prompt({
+      type: "input",
+      name: "addDepartment",
+      message: "What is the name of the new department?",
+    })
+    .then((answer) => {
+      console.log(answer.addDepartment);
+    });
 };
 
 const addRole = () => {
-  inquirer.prompt({
-    type: "input",
-    name: "addRole",
-    message: "What is the name of the new role?",
-  });
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "addRole",
+        message: "What is the name of the new role?",
+      },
+      {
+        type: "input",
+        name: "newSalary",
+        message: "What is the salary of the new role?",
+      },
+      {
+        type: "list",
+        name: "whichDepartment",
+        message: "In which department is the new role?",
+        choices: ["Department 1", "Department 2", "Department 3"],
+      },
+    ])
+    .then((answer) => {
+      console.log(answer.addRole);
+      console.log(answer.newSalary);
+      console.log(answer.whichDepartment);
+      menuOptions();
+    });
 };
 
 const addEmployee = () => {
-  inquirer.prompt({
-    type: "input",
-    name: "addEmployee",
-    message: "What is the name of the new employee?",
-  });
+  inquirer
+    .prompt({
+      type: "input",
+      name: "addEmployee",
+      message: "What is the name of the new employee?",
+    })
+    .then((answer) => {
+      console.log(answer.addEmployee);
+    });
 };
+///////////////////////////////////////
 
 const updateEmployeeRole = () => {
-  console.log("Returning to menu options.")
+  console.log("Returning to menu options.");
 };
 const viewDepartments = () => {
-  console.log("Returning to menu options.")
-  menuOptions()
+  console.log("Returning to menu options.");
+  menuOptions();
 };
 const viewRoles = () => {
-  console.log("Returning to menu options.")
-  menuOptions()
+  console.log("Returning to menu options.");
+  menuOptions();
 };
 const viewEmployees = () => {
-  console.log("Returning to menu options.")
-  menuOptions()
+  console.log("Returning to menu options.");
+  menuOptions();
 };
 const quitApp = () => {
-  console.log("Returning to menu options.")
+  console.log("Returning to menu options.");
 };
 
 menuOptions();
