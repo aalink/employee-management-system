@@ -47,6 +47,22 @@ const menuOptions = () => {
         console.log("Adding Employee");
         addEmployee();
       }
+      if (answer.menu === "Update employee role") {
+        console.log("Adding Employee");
+        updateEmployeeRole();
+      }
+      if (answer.menu === "View all departments") {
+        console.log("View Departments");
+        viewDepartments();
+      }
+      if (answer.menu === "View all roles") {
+        console.log("Viewing Roles");
+        viewRoles();
+      }
+      if (answer.menu === "View all employees") {
+        console.log("Viewing Employees");
+        viewEmployees();
+      }
     });
 };
 
@@ -73,5 +89,10 @@ const addEmployee = () => {
     message: "What is the name of the new employee?",
   });
 };
+
+const updateEmployeeRole = () => [];
+const viewDepartments = () => [];
+const viewRoles = () => [];
+const viewEmployees = () => [];
 
 menuOptions();
