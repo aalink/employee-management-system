@@ -4,15 +4,15 @@ const inquirer = require("inquirer");
 const consoleTable = require("console.table");
 
 // Connect to database and provide username and password.
-// const dbConnection = mysql.createConnection(
-//     {
-//       host: 'localhost',
-//       user: 'root',
-//       password: 'rootroot',
-//       database: 'employee_db'
-//     },
-//     console.log(`Connected to the employee_db database.`)
-//   );
+const dbConnection = mysql.createConnection(
+    {
+      host: 'localhost',
+      user: 'root',
+      password: 'rootroot',
+      database: 'employee_db'
+    },
+    console.log(`Connected to the employee_db database.`)
+  );
 
 // Prompts to be used when starting the app and choosing to perform additional actions.
 const menuOptions = () => {
@@ -94,10 +94,23 @@ const addEmployee = () => {
   });
 };
 
-const updateEmployeeRole = () => [];
-const viewDepartments = () => [];
-const viewRoles = () => [];
-const viewEmployees = () => [];
-const quitApp = () => [];
+const updateEmployeeRole = () => {
+  console.log("Returning to menu options.")
+};
+const viewDepartments = () => {
+  console.log("Returning to menu options.")
+  menuOptions()
+};
+const viewRoles = () => {
+  console.log("Returning to menu options.")
+  menuOptions()
+};
+const viewEmployees = () => {
+  console.log("Returning to menu options.")
+  menuOptions()
+};
+const quitApp = () => {
+  console.log("Returning to menu options.")
+};
 
 menuOptions();
