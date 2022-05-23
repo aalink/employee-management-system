@@ -63,6 +63,10 @@ const menuOptions = () => {
         console.log("Viewing Employees");
         viewEmployees();
       }
+      if (answer.menu === "Quit Employee Management Application") {
+        console.log("Quitting Application");
+        quitApp();
+      }
     });
 };
 
@@ -94,5 +98,6 @@ const updateEmployeeRole = () => [];
 const viewDepartments = () => [];
 const viewRoles = () => [];
 const viewEmployees = () => [];
+const quitApp = () => [];
 
 menuOptions();
