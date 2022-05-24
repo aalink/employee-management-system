@@ -158,7 +158,11 @@ const viewDepartments = () => {
 };
 const viewRoles = () => {
   console.log("Returning to menu options.");
+  dbConnection.query("SELECT * FROM role", function (err, results) {
+    let roleTable = consoleTable.getTable(results);
+    console.table(roleTable);
   menuOptions();
+});
 };
 const viewEmployees = () => {
   console.log("Returning to menu options.");
