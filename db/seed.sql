@@ -24,7 +24,7 @@ VALUE
 ('Financial Analyst', 80000, 4),
 ('Finance Manager', 90000, 4),
 ('Patent Attorney', 90000, 5),
-('Legal Analyst', 90000, 5);
+('Legal Analyst', 90000, 5),
 ('Legal Manager', 100000, 5);
 
 
