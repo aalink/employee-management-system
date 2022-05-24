@@ -70,7 +70,9 @@ const menuOptions = () => {
     });
 };
 
-// Add Functions //////////////////////
+///////////////////////////////////////
+/////////// Add Functions /////////////
+///////////////////////////////////////
 const addDepartment = () => {
   inquirer
     .prompt({
@@ -79,7 +81,8 @@ const addDepartment = () => {
       message: "What is the name of the new department?",
     })
     .then((answer) => {
-      console.log(answer.addDepartment);
+      dbConnection.query("INSERT INTO department (name) VALUES (?);", answer.addDepartment);
+      viewDepartments();
     });
 };
 
@@ -144,15 +147,22 @@ const addEmployee = () => {
     });
 };
 ///////////////////////////////////////
+///////////////////////////////////////
+///////////////////////////////////////
 
 const updateEmployeeRole = () => {
   console.log("Returning to menu options.");
 };
+
+
+///////////////////////////////////////
+/////////// View Functions ////////////
+///////////////////////////////////////
 const viewDepartments = () => {
   dbConnection.query("SELECT * FROM department", function (err, results) {
     let departmentTable = consoleTable.getTable(results);
     console.table(departmentTable);
-    console.log("Returning to menu options.");
+    console.log("Use the up or down arrow keys to select the next option of the menu.");
   });
   menuOptions();
 };
@@ -160,7 +170,7 @@ const viewRoles = () => {
   dbConnection.query("SELECT * FROM role", function (err, results) {
     let roleTable = consoleTable.getTable(results);
     console.table(roleTable);
-    console.log("Returning to menu options.");
+    console.log("Use the up or down arrow keys to select the next option of the menu.");
   menuOptions();
 });
 };
@@ -168,10 +178,14 @@ const viewEmployees = () => {
   dbConnection.query("SELECT * FROM employee", function (err, results) {
     let employeeTable = consoleTable.getTable(results);
     console.table(employeeTable);
-    console.log("Returning to menu options.");
+    console.log("Use the up or down arrow keys to select the next option of the menu.");
   menuOptions();
 });
 };
+///////////////////////////////////////
+///////////////////////////////////////
+///////////////////////////////////////
+
 const quitApp = () => {
   console.log("Quitting Application.");
   dbConnection.end();
