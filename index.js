@@ -140,7 +140,7 @@ const addEmployee = () => {
       console.log(answer.employeeLastName);
       console.log(answer.employeeRole);
       console.log(answer.employeeManager);
-      menuOptions()
+      menuOptions();
     });
 };
 ///////////////////////////////////////
@@ -150,6 +150,10 @@ const updateEmployeeRole = () => {
 };
 const viewDepartments = () => {
   console.log("Returning to menu options.");
+  dbConnection.query("SELECT * FROM department", function (err, results) {
+    let departmentTable = consoleTable.getTable(results);
+    console.table(departmentTable);
+  });
   menuOptions();
 };
 const viewRoles = () => {
