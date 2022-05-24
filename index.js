@@ -149,24 +149,28 @@ const updateEmployeeRole = () => {
   console.log("Returning to menu options.");
 };
 const viewDepartments = () => {
-  console.log("Returning to menu options.");
   dbConnection.query("SELECT * FROM department", function (err, results) {
     let departmentTable = consoleTable.getTable(results);
     console.table(departmentTable);
+    console.log("Returning to menu options.");
   });
   menuOptions();
 };
 const viewRoles = () => {
-  console.log("Returning to menu options.");
   dbConnection.query("SELECT * FROM role", function (err, results) {
     let roleTable = consoleTable.getTable(results);
     console.table(roleTable);
+    console.log("Returning to menu options.");
   menuOptions();
 });
 };
 const viewEmployees = () => {
-  console.log("Returning to menu options.");
+  dbConnection.query("SELECT * FROM employee", function (err, results) {
+    let employeeTable = consoleTable.getTable(results);
+    console.table(employeeTable);
+    console.log("Returning to menu options.");
   menuOptions();
+});
 };
 const quitApp = () => {
   console.log("Quitting Application.");
