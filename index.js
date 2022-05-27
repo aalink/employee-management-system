@@ -81,37 +81,54 @@ const addDepartment = () => {
       message: "What is the name of the new department?",
     })
     .then((answer) => {
-      dbConnection.query("INSERT INTO department (name) VALUES (?);", answer.addDepartment);
+      dbConnection.query(
+        "INSERT INTO department (name) VALUES (?);",
+        answer.addDepartment);
       viewDepartments();
     });
 };
 
 const addRole = () => {
-  inquirer
-    .prompt([
-      {
-        type: "input",
-        name: "addRole",
-        message: "What is the name of the new role?",
-      },
-      {
-        type: "input",
-        name: "newSalary",
-        message: "What is the salary of the new role?",
-      },
-      {
-        type: "list",
-        name: "whichDepartment",
-        message: "In which department is the new role?",
-        choices: ["Department 1", "Department 2", "Department 3"],
-      },
-    ])
-    .then((answer) => {
-      console.log(answer.addRole);
-      console.log(answer.newSalary);
-      console.log(answer.whichDepartment);
-      menuOptions();
+  let departmentOptions;
+  dbConnection
+    .promise().query("SELECT id, name FROM department")
+    .then(([results]) =>{
+      console.log(results)
+      departmentOptions = results.map((a) => {
+        return {
+          name: a.name,
+          value: a.id,
+        };
+      });
+    })
+    .then(() => {
+      inquirer
+        .prompt([
+          {
+            type: "input",
+            name: "addRole",
+            message: "What is the name of the new role?",
+          },
+          {
+            type: "input",
+            name: "newSalary",
+            message: "What is the salary of the new role?",
+          },
+          {
+            type: "list",
+            name: "whichDepartment",
+            message: "In which department is the new role?",
+            choices: departmentOptions,
+          },
+        ])
+        .then((answer) => {
+          // console.log(answer.addRole);
+          // console.log(answer.newSalary);
+          // console.log(answer.whichDepartment);
+          menuOptions();
+        });
     });
+  // console.log(departmentOptions);
 };
 
 const addEmployee = () => {
@@ -149,12 +166,17 @@ const addEmployee = () => {
 ///////////////////////////////////////
 ///////////////////////////////////////
 ///////////////////////////////////////
-
+//------------------------------------
+///////////////////////////////////////
+/////////// Update Function ///////////
+///////////////////////////////////////
 const updateEmployeeRole = () => {
   console.log("Returning to menu options.");
 };
-
-
+///////////////////////////////////////
+///////////////////////////////////////
+///////////////////////////////////////
+//------------------------------------
 ///////////////////////////////////////
 /////////// View Functions ////////////
 ///////////////////////////////////////
@@ -162,7 +184,10 @@ const viewDepartments = () => {
   dbConnection.query("SELECT * FROM department", function (err, results) {
     let departmentTable = consoleTable.getTable(results);
     console.table(departmentTable);
-    console.log("Use the up or down arrow keys to select the next option of the menu.");
+    // console.log("Use the up or down arrow keys to select the next option of the menu.");
+    // console.log(results)
+    // let test3 = results.map(a => a.name);
+    // console.log(test3)
   });
   menuOptions();
 };
@@ -170,22 +195,26 @@ const viewRoles = () => {
   dbConnection.query("SELECT * FROM role", function (err, results) {
     let roleTable = consoleTable.getTable(results);
     console.table(roleTable);
-    console.log("Use the up or down arrow keys to select the next option of the menu.");
-  menuOptions();
-});
+    console.log(
+      "Use the up or down arrow keys to select the next option of the menu."
+    );
+    menuOptions();
+  });
 };
 const viewEmployees = () => {
   dbConnection.query("SELECT * FROM employee", function (err, results) {
     let employeeTable = consoleTable.getTable(results);
     console.table(employeeTable);
-    console.log("Use the up or down arrow keys to select the next option of the menu.");
-  menuOptions();
-});
+    console.log(
+      "Use the up or down arrow keys to select the next option of the menu."
+    );
+    menuOptions();
+  });
 };
 ///////////////////////////////////////
 ///////////////////////////////////////
 ///////////////////////////////////////
-
+//------------------------------------
 const quitApp = () => {
   console.log("Quitting Application.");
   dbConnection.end();
