@@ -83,7 +83,8 @@ const addDepartment = () => {
     .then((answer) => {
       dbConnection.query(
         "INSERT INTO department (name) VALUES (?);",
-        answer.addDepartment);
+        answer.addDepartment
+      );
       viewDepartments();
     });
 };
@@ -91,9 +92,10 @@ const addDepartment = () => {
 const addRole = () => {
   let departmentOptions;
   dbConnection
-    .promise().query("SELECT id, name FROM department")
-    .then(([results]) =>{
-      console.log(results)
+    .promise()
+    .query("SELECT id, name FROM department")
+    .then(([results]) => {
+      console.log(results);
       departmentOptions = results.map((a) => {
         return {
           name: a.name,
@@ -124,8 +126,9 @@ const addRole = () => {
         .then((answer) => {
           dbConnection.query(
             "INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?);",
-            [answer.addRole, answer.newSalary, answer.whichDepartment]);
-         
+            [answer.addRole, answer.newSalary, answer.whichDepartment]
+          );
+
           menuOptions();
         });
     });
@@ -133,35 +136,74 @@ const addRole = () => {
 };
 
 const addEmployee = () => {
-  inquirer
-    .prompt([
-      {
-        type: "input",
-        name: "employeeFirstName",
-        message: "What is the first name of the new employee?",
-      },
-      {
-        type: "input",
-        name: "employeeLastName",
-        message: "What is the last name of the new employee?",
-      },
-      {
-        type: "input",
-        name: "employeeRole",
-        message: "What is the role of this employee?",
-      },
-      {
-        type: "input",
-        name: "employeeManager",
-        message: "Who is the manager of this employee?",
-      },
-    ])
-    .then((answer) => {
-      console.log(answer.employeeFirstName);
-      console.log(answer.employeeLastName);
-      console.log(answer.employeeRole);
-      console.log(answer.employeeManager);
-      menuOptions();
+  let roleOptions;
+  let managerChoices;
+  dbConnection
+    .promise()
+    .query("SELECT id, title FROM role")
+    .then(([results]) => {
+      console.log(results);
+      roleOptions = results.map((a) => {
+        return {
+          name: a.title,
+          value: a.id,
+        };
+      });
+    })
+    .then(() => {
+      dbConnection
+        .promise()
+        .query("SELECT id, first_name, last_name FROM employee")
+        .then(([results]) => {
+          // console.log(results);
+          // TODO: make a selectable option for no manager ----------------------------------
+          managerChoices = results.map((a) => {
+            return {
+              name: `${a.first_name} ${a.last_name}`,
+              value: a.id,
+            };
+          });
+        })
+
+        .then(() => {
+          inquirer
+            .prompt([
+              {
+                type: "input",
+                name: "employeeFirstName",
+                message: "What is the first name of the new employee?",
+              },
+              {
+                type: "input",
+                name: "employeeLastName",
+                message: "What is the last name of the new employee?",
+              },
+              {
+                type: "list",
+                name: "employeeRole",
+                message: "What is the role of this employee?",
+                choices: roleOptions,
+              },
+              {
+                type: "list",
+                name: "employeeManager",
+                message: "Who is the manager of this employee?",
+                choices: managerChoices,
+              },
+            ])
+            .then((answer) => {
+              dbConnection.query(
+                "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?);",
+                [
+                  answer.employeeFirstName,
+                  answer.employeeLastName,
+                  answer.employeeRole,
+                  parseInt(answer.employeeManager),
+                ]
+              );
+              menuOptions();
+            });
+        });
     });
 };
 ///////////////////////////////////////
@@ -173,6 +215,7 @@ const addEmployee = () => {
 ///////////////////////////////////////
 const updateEmployeeRole = () => {
   console.log("Returning to menu options.");
+  // get all the roles to choose from
 };
 ///////////////////////////////////////
 ///////////////////////////////////////
