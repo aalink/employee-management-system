@@ -122,9 +122,10 @@ const addRole = () => {
           },
         ])
         .then((answer) => {
-          // console.log(answer.addRole);
-          // console.log(answer.newSalary);
-          // console.log(answer.whichDepartment);
+          dbConnection.query(
+            "INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?);",
+            [answer.addRole, answer.newSalary, answer.whichDepartment]);
+         
           menuOptions();
         });
     });
