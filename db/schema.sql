@@ -20,7 +20,7 @@ CREATE TABLE role (
 
 -- Makes employee table
 CREATE TABLE employee (
-    id INT UNSIGNED PRIMARY KEY,
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
     role_id INT NOT NULL,
