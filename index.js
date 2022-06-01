@@ -214,7 +214,6 @@ const addEmployee = () => {
 /////////// Update Function ///////////
 ///////////////////////////////////////
 const updateEmployeeRole = () => {
-  console.log("Returning to menu options.");
   // get all the roles to choose from
 };
 ///////////////////////////////////////
@@ -228,12 +227,11 @@ const viewDepartments = () => {
   dbConnection.query("SELECT * FROM department", function (err, results) {
     let departmentTable = consoleTable.getTable(results);
     console.table(departmentTable);
-    // console.log("Use the up or down arrow keys to select the next option of the menu.");
-    // console.log(results)
-    // let test3 = results.map(a => a.name);
-    // console.log(test3)
+    console.log(
+      "Use the up or down arrow keys to select the next option of the menu."
+    );
+    menuOptions();
   });
-  menuOptions();
 };
 const viewRoles = () => {
   dbConnection.query("SELECT * FROM role", function (err, results) {
