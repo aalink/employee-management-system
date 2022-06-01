@@ -12,7 +12,7 @@ Repository Link: https://github.com/aalink/employee-management-system
 
 A video demonstration can be found in this Google Drive folder: https://drive.google.com/drive/folders/1WxP9P_VDn6uoL9jYTZyS18SLDMwQt7b2?usp=sharing
 
-<!-- ![Image/Gif](/assets/images/putfilenamehere) -->
+![Employee Management System](/assets/images/employee-management-system.gif)
 
 ## Table of Contents
 
